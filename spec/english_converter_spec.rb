@@ -30,5 +30,21 @@ describe EnglishConverter do
     braille = File.open('braille.txt', "r")
     expect(braille.read).to eq("0.\n"+"..\n" + "..")
   end
+
+  it 'can pull english characters into array' do
+    expect(converter.english_characters).to eq(["a"])
+  end
+
+  it 'can replace english characters w/ braille' do
+    allow(converter).to receive(:english_characters).and_return(["a"])
+
+    expect(converter.replace_characters).to eq(["0.", "..", ".."])
+  end
+
+  it 'can format braille characters' do
+    allow(converter).to receive(:english_characters).and_return(["a"])
+
+    expect(converter.format_braille).to eq("0.\n"+"..\n" + "..")
+  end
   
 end
