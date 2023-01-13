@@ -1,9 +1,11 @@
+require_relative 'file_accessor'
+
 class EnglishConverter
   attr_reader :braille_dictionary
   def initialize
     @braille_dictionary = dictionary_hash
   end
-  
+
   def dictionary_hash
     {
       'a' => [b_key, d_key, d_key],
@@ -34,6 +36,7 @@ class EnglishConverter
       'z' => [b_key, c_key, a_key]
     }
   end
+  
   def a_key
     '00'
   end
@@ -48,6 +51,30 @@ class EnglishConverter
 
   def d_key
     '..'
+  end
+
+  def convert_to_braille
+    # message = FileAccessor.message_receiver
+    message = File.open('message.txt', "r")
+    @english_characters = message.read.split
+
+    # braille = FileAccessor.generate_file
+    braille = File.new('braille.txt', "w+")
+    braille.write(format_braille)
+  end
+
+  def replace_characters
+    conversion = []
+    dictionary_hash.each do |k, v|
+      @english_characters.each do |char|
+        conversion << v if k == char
+      end
+    end
+    conversion.flatten
+  end
+
+  def format_braille
+    replace_characters.join("\n")
   end
 
 end
