@@ -5,6 +5,6 @@ class FileAccessor
   end
 
   def self.character_count
-    message_reciever.read.size
+    message_receiver.read.size
   end
 end
