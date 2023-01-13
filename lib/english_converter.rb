@@ -54,19 +54,21 @@ class EnglishConverter
   end
 
   def convert_to_braille
-    # message = FileAccessor.message_receiver
-    message = File.open('message.txt', "r")
-    @english_characters = message.read.split
-
-    # braille = FileAccessor.generate_file
-    braille = File.new('braille.txt', "w+")
+    braille = FileAccessor.generate_file
+    # braille = File.new('braille.txt', "w+")
     braille.write(format_braille)
+  end
+
+  def english_characters
+    message = FileAccessor.message_receiver
+    # message = File.open('message.txt', "r")
+    message.read.split
   end
 
   def replace_characters
     conversion = []
     dictionary_hash.each do |k, v|
-      @english_characters.each do |char|
+      english_characters.each do |char|
         conversion << v if k == char
       end
     end
