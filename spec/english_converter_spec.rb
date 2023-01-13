@@ -28,8 +28,7 @@ describe EnglishConverter do
     converter.convert_to_braille
     
     braille = File.open('braille.txt', "r")
-
-    expect(braille.read).to eq('0.\n'+'..\n' + '..')
+    expect(braille.read).to eq("0.\n"+"..\n" + "..")
   end
   
 end
