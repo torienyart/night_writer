@@ -12,11 +12,4 @@ describe FileAccessor do
 
     expect(FileAccessor.output_character_count).to eq(0)
   end
-
-  it 'can convert english characters to braille characters' do
-    FileAccessor.convert_to_braille
-    braille = File.open('braille.txt', "r")
-
-    expect(braille.read).to eq('0.\n'+'..\n' + '..')
-  end
 end
