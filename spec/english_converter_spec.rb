@@ -23,5 +23,13 @@ describe EnglishConverter do
   it 'stores a braille dictionary' do
     expect(converter.braille_dictionary).to eq(converter.dictionary_hash)
   end
+
+  it 'can convert english characters to braille characters' do
+    converter.convert_to_braille
+    
+    braille = File.open('braille.txt', "r")
+
+    expect(braille.read).to eq('0.\n'+'..\n' + '..')
+  end
   
 end
