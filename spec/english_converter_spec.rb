@@ -21,7 +21,7 @@ describe EnglishConverter do
   end
 
   it 'stores a braille dictionary' do
-    expect(converter.braille_dictionary).to eq(dictionary_hash))
+    expect(converter.braille_dictionary).to eq(converter.dictionary_hash)
   end
   
 end

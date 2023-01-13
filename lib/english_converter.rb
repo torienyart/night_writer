@@ -1,5 +1,9 @@
 class EnglishConverter
-
+  attr_reader :braille_dictionary
+  def initialize
+    @braille_dictionary = dictionary_hash
+  end
+  
   def dictionary_hash
     {
       'a' => [b_key, d_key, d_key],
