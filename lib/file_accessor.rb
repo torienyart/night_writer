@@ -13,6 +13,7 @@ class FileAccessor
   end
 
   def self.output_character_count
-    generate_file.read.size
+    braille_file = File.open(ARGV[1],"r")
+    braille_file.read.size
   end
 end
