@@ -40,7 +40,7 @@ describe EnglishConverter do
   it 'can replace english characters w/ braille' do
     allow(converter).to receive(:english_characters).and_return(["a"])
     
-    expect(converter.replace_characters).to eq(["0.", "..", ".."])
+    expect(converter.replace_characters).to eq({"a"=>["0.", "..", ".."]})
   end
   
   it 'can format braille characters' do
