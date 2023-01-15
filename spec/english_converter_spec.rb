@@ -26,7 +26,7 @@ describe EnglishConverter do
 
   it 'can convert english characters to braille characters' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
-    allow(FileAccessor).to receive(:message_receiver).and_return(File.open('message.txt', "r"))
+    allow(converter).to receive(:english_characters).and_return(["a"])
 
     converter.convert_to_braille
     
@@ -39,7 +39,7 @@ describe EnglishConverter do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
     allow(FileAccessor).to receive(:message_receiver).and_return(File.open('message.txt', "r"))
 
-    expect(converter.english_characters).to eq(["a"])
+    expect(converter.english_characters).to eq(["abc"])
   end
 
   it 'can replace english characters w/ braille' do
@@ -52,6 +52,12 @@ describe EnglishConverter do
     allow(converter).to receive(:english_characters).and_return(["a"])
 
     expect(converter.format_braille).to eq("0.\n"+"..\n" + "..")
+  end
+
+  it 'can take and format multiple letters' do
+    allow(converter).to receive(:english_characters).and_return(["abc"])
+
+    expect(converter.format_braille).to eq("0.0.00\n"+"..0...\n" + "......")
   end
   
 end
