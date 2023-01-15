@@ -4,6 +4,7 @@ class EnglishConverter
   attr_reader :braille_dictionary
   def initialize
     @braille_dictionary = dictionary_hash
+    @english_characters = []
   end
 
   def dictionary_hash
@@ -57,14 +58,15 @@ class EnglishConverter
     braille = FileAccessor.generate_file
     # braille = File.new('braille.txt', "w+")
     braille.write(format_braille)
+    braille.rewind
   end
-
+  
   def english_characters
     message = FileAccessor.message_receiver
-    # message = File.open('message.txt', "r")
+    message.rewind
     message.read.split
   end
-
+  
   def replace_characters
     conversion = []
     dictionary_hash.each do |k, v|

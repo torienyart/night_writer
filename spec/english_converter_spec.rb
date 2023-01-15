@@ -25,13 +25,20 @@ describe EnglishConverter do
   end
 
   it 'can convert english characters to braille characters' do
+    allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
+    allow(FileAccessor).to receive(:message_receiver).and_return(File.open('message.txt', "r"))
+
     converter.convert_to_braille
     
     braille = File.open('braille.txt', "r")
+
     expect(braille.read).to eq("0.\n"+"..\n" + "..")
   end
 
   it 'can pull english characters into array' do
+    allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
+    allow(FileAccessor).to receive(:message_receiver).and_return(File.open('message.txt', "r"))
+
     expect(converter.english_characters).to eq(["a"])
   end
 
