@@ -34,7 +34,8 @@ class EnglishConverter
       'w' => [c_key, a_key, c_key],
       'x' => [a_key, d_key, a_key],
       'y' => [a_key, c_key, a_key],
-      'z' => [b_key, c_key, a_key]
+      'z' => [b_key, c_key, a_key],
+      ' ' => [d_key, d_key, d_key]
     }
   end
   
@@ -64,7 +65,6 @@ class EnglishConverter
   def english_characters
     message = FileAccessor.message_receiver
     message.rewind
-  require 'pry'; binding.pry
     message.read.split("")
   end
   
