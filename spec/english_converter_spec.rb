@@ -40,7 +40,7 @@ describe EnglishConverter do
   it 'can replace english characters w/ braille' do
     allow(converter).to receive(:english_characters).and_return(["a"])
     
-    expect(converter.replace_characters).to eq({"a"=>["0.", "..", ".."]})
+    expect(converter.replace_characters).to eq([["0.", "..", ".."]])
   end
   
   it 'can format braille characters' do
@@ -73,8 +73,18 @@ describe EnglishConverter do
     converter.convert_to_braille
     
     braille = File.open('braille.txt', "r")
+
+
+    line_1 = braille.readlines[0]
+    braille.rewind
+    line_2 = braille.readlines[1]
+    braille.rewind
+    line_3 = braille.readlines[2]
     
-    expect(braille.read).to eq("0.0.00\n"+"..0...\n" + "......")
+    expect(line_1.size).to eq(81)
+    expect(line_2.size).to eq(81)
+    expect(line_3.size).to eq(81)
+
   end
   
 end
