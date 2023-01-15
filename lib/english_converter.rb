@@ -21,10 +21,10 @@ class EnglishConverter
       'j' => [c_key, a_key, d_key],
       'k' => [b_key, d_key, b_key],
       'l' => [b_key, b_key, b_key],
-      'm' => [c_key, a_key, c_key],
-      'n' => [a_key, d_key, a_key],
-      'o' => [a_key, c_key, a_key],
-      'p' => [b_key, c_key, a_key],
+      'm' => [a_key, d_key, b_key],
+      'n' => [a_key, c_key, b_key],
+      'o' => [b_key, c_key, b_key],
+      'p' => [a_key, b_key, b_key],
       'q' => [a_key, a_key, b_key],
       'r' => [b_key, a_key, b_key],
       's' => [c_key, b_key, b_key],
@@ -34,7 +34,8 @@ class EnglishConverter
       'w' => [c_key, a_key, c_key],
       'x' => [a_key, d_key, a_key],
       'y' => [a_key, c_key, a_key],
-      'z' => [b_key, c_key, a_key]
+      'z' => [b_key, c_key, a_key],
+      ' ' => [d_key, d_key, d_key]
     }
   end
   
@@ -56,7 +57,6 @@ class EnglishConverter
 
   def convert_to_braille
     braille = FileAccessor.generate_file
-    # braille = File.new('braille.txt', "w+")
     braille.write(format_braille)
     braille.rewind
   end
@@ -64,21 +64,21 @@ class EnglishConverter
   def english_characters
     message = FileAccessor.message_receiver
     message.rewind
-    message.read.split
+    message.read.split("")
   end
-  
+
   def replace_characters
-    conversion = []
-    dictionary_hash.each do |k, v|
-      english_characters.each do |char|
-        conversion << v if k == char
-      end
+    braille_characters = english_characters.map do |char|
+      dictionary_hash[char]
     end
-    conversion.flatten
   end
 
   def format_braille
-    replace_characters.join("\n")
+    lines_array = replace_characters.transpose.map do |char|
+      char.join.chars.each_slice(80).map do |slice|
+        slice.join
+      end
+    end.transpose.join("\n")
   end
 
 end
