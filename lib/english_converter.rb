@@ -57,7 +57,6 @@ class EnglishConverter
 
   def convert_to_braille
     braille = FileAccessor.generate_file
-    # braille = File.new('braille.txt', "w+")
     braille.write(format_braille)
     braille.rewind
   end
@@ -68,18 +67,46 @@ class EnglishConverter
     message.read.split("")
   end
   
+  # def replace_characters
+  #   conversion = []
+  #   dictionary_hash.each do |k, v|
+  #     english_characters.each do |char|
+  #       conversion << v if k == char
+  #     end
+  #   end
+  #   conversion.flatten
+  # end
+
   def replace_characters
-    conversion = []
+    conversion = Hash.new
     dictionary_hash.each do |k, v|
       english_characters.each do |char|
-        conversion << v if k == char
+        if k == char
+          conversion[char] = v
+        end
       end
     end
-    conversion.flatten
+    conversion
   end
 
   def format_braille
-    replace_characters.join("\n")
+    line_1 = []
+    line_2 = []
+    line_3 = []
+
+    replace_characters.each do |k, v|
+      line_1 << v[0]
+    end
+
+    replace_characters.each do |k, v|
+      line_2 << v[1]
+    end
+
+    replace_characters.each do |k, v|
+      line_3 << v[2]
+    end
+
+    converted = line_1.join + "\n" + line_2.join + "\n" + line_3.join    
   end
 
 end
