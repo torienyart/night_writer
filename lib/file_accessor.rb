@@ -12,8 +12,11 @@ class FileAccessor
     File.new(ARGV[1], "w+")
   end
 
+  def self.open_new_file
+    File.open(ARGV[1],"r")
+  end
+
   def self.output_character_count
-    braille_file = File.open(ARGV[1],"r")
-    braille_file.read.size
+    open_new_file.read.size
   end
 end
