@@ -21,10 +21,10 @@ class EnglishConverter
       'j' => [c_key, a_key, d_key],
       'k' => [b_key, d_key, b_key],
       'l' => [b_key, b_key, b_key],
-      'm' => [c_key, a_key, c_key],
-      'n' => [a_key, d_key, a_key],
-      'o' => [a_key, c_key, a_key],
-      'p' => [b_key, c_key, a_key],
+      'm' => [a_key, d_key, b_key],
+      'n' => [a_key, c_key, b_key],
+      'o' => [b_key, c_key, b_key],
+      'p' => [a_key, b_key, b_key],
       'q' => [a_key, a_key, b_key],
       'r' => [b_key, a_key, b_key],
       's' => [c_key, b_key, b_key],
@@ -68,35 +68,17 @@ class EnglishConverter
   end
 
   def replace_characters
-    conversion = Hash.new
-    dictionary_hash.each do |k, v|
-      english_characters.each do |char|
-        if k == char
-          conversion[char] = v
-        end
-      end
+    braille_characters = english_characters.map do |char|
+      dictionary_hash[char]
     end
-    conversion
   end
 
   def format_braille
-    line_1 = []
-    line_2 = []
-    line_3 = []
-
-    replace_characters.each do |k, v|
-      line_1 << v[0]
-    end
-
-    replace_characters.each do |k, v|
-      line_2 << v[1]
-    end
-
-    replace_characters.each do |k, v|
-      line_3 << v[2]
-    end
-
-    converted = line_1.join + "\n" + line_2.join + "\n" + line_3.join    
+    lines_array = replace_characters.transpose.map do |char|
+      char.join.chars.each_slice(80).map do |slice|
+        slice.join
+      end
+    end.transpose.join("\n")
   end
 
 end
