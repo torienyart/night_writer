@@ -66,16 +66,6 @@ class EnglishConverter
     message.rewind
     message.read.split("")
   end
-  
-  # def replace_characters
-  #   conversion = []
-  #   dictionary_hash.each do |k, v|
-  #     english_characters.each do |char|
-  #       conversion << v if k == char
-  #     end
-  #   end
-  #   conversion.flatten
-  # end
 
   def replace_characters
     conversion = Hash.new
