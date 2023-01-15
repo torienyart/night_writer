@@ -15,8 +15,13 @@ describe EnglishConverter do
   end
 
   it 'can have a braille dictionary' do
-    expect(converter.dictionary_hash.count).to eq(26)
-    expect(converter.dictionary_hash.keys).to eq(('a'..'z').to_a)
+    expect(converter.dictionary_hash.count).to eq(27)
+
+    expected = []
+    expected << ('a'..'z').to_a
+    expected << ' '
+
+    expect(converter.dictionary_hash.keys).to eq(expected.flatten)
     expect(converter.dictionary_hash['a']).to eq(["0.", "..", ".."])
   end
 
