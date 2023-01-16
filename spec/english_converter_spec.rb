@@ -49,11 +49,11 @@ describe EnglishConverter do
     expect(converter.format_braille).to eq("0.\n"+"..\n" + "..")
   end
   
-  # it 'can take and format multiple letters' do
-  #   allow(converter).to receive(:english_characters).and_return(["a", "b", "c"])
+  it 'can take and format multiple letters' do
+    allow(converter).to receive(:english_characters).and_return(["a", "b", "c"])
   
-  #   expect(converter.format_braille).to eq("0.0.00\n"+"..0...\n" + "......")
-  # end
+    expect(converter.format_braille).to eq("0.0.00\n"+"..0...\n" + "......")
+  end
 
   it 'can convert english characters to braille characters' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))

@@ -59,7 +59,4 @@ describe BrailleConverter do
     
     expect(english.read).to eq("abc")
   end
-
-
-  
 end
