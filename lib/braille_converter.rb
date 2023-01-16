@@ -78,4 +78,10 @@ class BrailleConverter
     end.join("\n")
   end
 
+  def convert_to_english
+    english = FileAccessor.generate_file
+    english.write(format_english)
+    english.rewind
+  end
+
 end
