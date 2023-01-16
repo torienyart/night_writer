@@ -50,14 +50,14 @@ describe BrailleConverter do
   end
 
   it 'can convert braille characters to english characters' do
-    allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
+    allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
     allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
     
-    converter.convert_to_braille
+    converter.convert_to_english
     
-    braille = File.open('braille.txt', "r")
+    english = File.open('original_message.txt', "r")
     
-    expect(braille.read).to eq("0.0.00\n"+"..0...\n" + "......")
+    expect(english.read).to eq("abc")
   end
 
   it 'can format multiple lines' do
