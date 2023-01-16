@@ -34,24 +34,24 @@ describe BrailleConverter do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
     allow(FileAccessor).to receive(:message_receiver).and_return(File.open('dummy_braille.txt', "r"))
     
-    expect(converter.braille_characters).to eq([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    expect(converter.braille_characters).to eq([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
   end
   
   it 'can replace braille characters w/ english' do
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
-    expect(converter.replace_characters).to eq(["a", "b", "c"])
+    expect(converter.replace_characters).to eq([["a", "b", "c"]])
   end
   
   it 'can format english characters' do
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
     expect(converter.format_english).to eq("abc")
   end
 
   it 'can convert braille characters to english characters' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
     converter.convert_to_english
     
@@ -59,5 +59,7 @@ describe BrailleConverter do
     
     expect(english.read).to eq("abc")
   end
+
+
   
 end
