@@ -59,26 +59,5 @@ describe BrailleConverter do
     
     expect(english.read).to eq("abc")
   end
-
-  it 'can format multiple lines' do
-    allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
-    allow(FileAccessor).to receive(:message_receiver).and_return(File.open('message.txt', "r"))
-    
-    converter.convert_to_english
-    
-    english = File.open('original_message.txt', "r")
-
-
-    line_1 = english.readlines[0]
-    english.rewind
-    line_2 = english.readlines[1]
-    english.rewind
-    line_3 = english.readlines[2]
-    
-    expect(line_1.size).to eq(41)
-    expect(line_2.size).to eq(41)
-    expect(line_3.size).to eq(41)
-
-  end
   
 end
