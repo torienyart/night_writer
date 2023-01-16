@@ -12,4 +12,22 @@ describe FileAccessor do
 
     expect(FileAccessor.output_character_count).to eq(20)
   end
+
+  it 'can receive a message' do
+    allow(File).to receive(:open).and_return(File.open('dummy_message.txt', "r"))
+
+    expect(FileAccessor.message_receiver).to be_an_instance_of File
+  end
+
+  it 'can generate a file' do
+    allow(File).to receive(:new).and_return(File.new('dummy_braille.txt', "r"))
+
+    expect(FileAccessor.generate_file).to be_an_instance_of File
+  end
+
+  it 'can receive a message' do
+    allow(File).to receive(:open).and_return(File.open('dummy_braille.txt', "r"))
+
+    expect(FileAccessor.open_new_file).to be_an_instance_of File
+  end
 end
