@@ -64,7 +64,8 @@ class EnglishConverter
   def english_characters
     message = FileAccessor.message_receiver
     message.rewind
-    message.read.split("")
+    message.read.delete("\n").split("")
+    
   end
 
   def replace_characters
