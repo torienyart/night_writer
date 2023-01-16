@@ -72,4 +72,10 @@ class BrailleConverter
     end
   end
 
+  def format_english
+    replace_characters.each_slice(40).map do |line|
+      line.join
+    end.join("\n")
+  end
+
 end
