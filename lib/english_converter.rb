@@ -1,6 +1,8 @@
 require_relative 'file_accessor'
+require './lib//modules/keyable'
 
 class EnglishConverter
+  include Keyable
   attr_reader :braille_dictionary
   def initialize
     @braille_dictionary = dictionary_hash
@@ -37,22 +39,6 @@ class EnglishConverter
       'z' => [b_key, c_key, a_key],
       ' ' => [d_key, d_key, d_key]
     }
-  end
-  
-  def a_key
-    '00'
-  end
-
-  def b_key
-    '0.'
-  end
-
-  def c_key
-    '.0'
-  end
-
-  def d_key
-    '..'
   end
 
   def convert_to_braille
