@@ -63,17 +63,21 @@ class BrailleConverter
       line.chars.each_slice(2).map do |char_lines|
         char_lines.join
       end
-    end.transpose
+    end.each_slice(3).map do |triple_line|
+      triple_line.transpose
+    end
   end
 
   def replace_characters
-    english_characters = braille_characters.map do |char|
-      dictionary_hash[char]
+    english_characters = braille_characters.map do |line|
+      line.map do |char|
+        dictionary_hash[char]
+      end
     end
   end
 
   def format_english
-    replace_characters.each_slice(40).map do |line|
+    replace_characters.map do |line|
       line.join
     end.join("\n")
   end
