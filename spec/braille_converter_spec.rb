@@ -20,9 +20,9 @@ describe BrailleConverter do
     expected = []
     expected << ('a'..'z').to_a
     expected << ' '
-
+    
     expect(converter.dictionary_hash.values).to eq(expected.flatten)
-    expect(converter.dictionary_hash["0.", "..", ".."]).to eq(['a'])
+    expect(converter.dictionary_hash[["0.", "..", ".."]]).to eq('a')
   end
 
   it 'stores an english dictionary' do
