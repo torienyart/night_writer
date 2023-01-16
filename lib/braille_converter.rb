@@ -69,7 +69,7 @@ class BrailleConverter
   end
 
   def replace_characters
-    english_characters = braille_characters.map do |line|
+    english_characters = braille_characters.filter_map do |line|
       line.map do |char|
         dictionary_hash[char]
       end
