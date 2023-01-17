@@ -1,4 +1,4 @@
-require './lib/braille_converter'
+require_relative 'spec_helper'
 
 describe BrailleConverter do
   let(:converter){BrailleConverter.new}

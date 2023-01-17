@@ -1,4 +1,4 @@
-require './lib/file_accessor'
+require_relative 'spec_helper'
 
 describe FileAccessor do
   it 'can count characters in a file' do

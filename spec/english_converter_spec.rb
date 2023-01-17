@@ -1,4 +1,4 @@
-require './lib/english_converter'
+require_relative 'spec_helper'
 
 describe EnglishConverter do
   let(:converter){EnglishConverter.new}
