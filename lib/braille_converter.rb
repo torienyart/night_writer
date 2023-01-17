@@ -45,7 +45,7 @@ class BrailleConverter
   def braille_characters
     message = FileAccessor.message_receiver
     message.rewind
-    lines = message.read.split("\n")
+    lines = message.read.downcase.split("\n")
     char_lines = lines.map do |line|
       line.chars.each_slice(2).map do |char_lines|
         char_lines.join
