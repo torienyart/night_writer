@@ -5,7 +5,7 @@ class FileAccessor
   end
 
   def self.input_character_count
-    message_receiver.read.size
+    message_receiver.read.gsub("\n",'').size
   end
 
   def self.generate_file
@@ -17,6 +17,6 @@ class FileAccessor
   end
 
   def self.output_character_count
-    open_new_file.read.size
+    open_new_file.read.gsub("\n",'').size
   end
 end

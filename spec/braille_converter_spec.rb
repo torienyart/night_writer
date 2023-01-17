@@ -1,4 +1,4 @@
-require './lib/braille_converter'
+require_relative 'spec_helper'
 
 describe BrailleConverter do
   let(:converter){BrailleConverter.new}
@@ -24,34 +24,29 @@ describe BrailleConverter do
     expect(converter.dictionary_hash.values).to eq(expected.flatten)
     expect(converter.dictionary_hash[["0.", "..", ".."]]).to eq('a')
   end
-
-  it 'stores an english dictionary' do
-    expect(converter.english_dictionary).to eq(converter.dictionary_hash)
-  end
-
   
   it 'can pull braille characters into array' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
     allow(FileAccessor).to receive(:message_receiver).and_return(File.open('dummy_braille.txt', "r"))
     
-    expect(converter.braille_characters).to eq([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    expect(converter.braille_characters).to eq([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
   end
   
   it 'can replace braille characters w/ english' do
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
-    expect(converter.replace_characters).to eq(["a", "b", "c"])
+    expect(converter.replace_characters).to eq([["a", "b", "c"]])
   end
   
   it 'can format english characters' do
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
     expect(converter.format_english).to eq("abc")
   end
 
   it 'can convert braille characters to english characters' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('original_message.txt', "w+"))
-    allow(converter).to receive(:braille_characters).and_return([["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]])
+    allow(converter).to receive(:braille_characters).and_return([[["0.", "..", ".."], ["0.", "0.", ".."], ["00", "..", ".."]]])
     
     converter.convert_to_english
     
@@ -59,5 +54,4 @@ describe BrailleConverter do
     
     expect(english.read).to eq("abc")
   end
-  
 end

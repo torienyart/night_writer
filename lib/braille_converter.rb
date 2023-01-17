@@ -1,11 +1,9 @@
 require_relative 'file_accessor'
+require './lib//modules/keyable'
+
 
 class BrailleConverter
-  attr_reader :english_dictionary
-  def initialize
-    @english_dictionary = dictionary_hash
-    @braille_characters = []
-  end
+  include Keyable
 
   def dictionary_hash
     {
@@ -38,27 +36,11 @@ class BrailleConverter
       [d_key, d_key, d_key] => ' '
     }
   end
-  
-  def a_key
-    '00'
-  end
-
-  def b_key
-    '0.'
-  end
-
-  def c_key
-    '.0'
-  end
-
-  def d_key
-    '..'
-  end
 
   def braille_characters
     message = FileAccessor.message_receiver
     message.rewind
-    lines = message.read.split("\n")
+    lines = message.read.downcase.split("\n")
     char_lines = lines.map do |line|
       line.chars.each_slice(2).map do |char_lines|
         char_lines.join
@@ -69,7 +51,7 @@ class BrailleConverter
   end
 
   def replace_characters
-    english_characters = braille_characters.map do |line|
+    english_characters = braille_characters.filter_map do |line|
       line.map do |char|
         dictionary_hash[char]
       end
@@ -87,5 +69,4 @@ class BrailleConverter
     english.write(format_english)
     english.rewind
   end
-
 end
