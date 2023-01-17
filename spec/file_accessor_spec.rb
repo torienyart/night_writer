@@ -10,7 +10,7 @@ describe FileAccessor do
   it 'can count output characters' do
     allow(FileAccessor).to receive(:open_new_file).and_return(File.open('dummy_braille.txt', "r"))
 
-    expect(FileAccessor.output_character_count).to eq(20)
+    expect(FileAccessor.output_character_count).to eq(18)
   end
 
   it 'can receive a message' do

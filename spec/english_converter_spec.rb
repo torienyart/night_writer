@@ -25,11 +25,6 @@ describe EnglishConverter do
     expect(converter.dictionary_hash['a']).to eq(["0.", "..", ".."])
   end
 
-  it 'stores a braille dictionary' do
-    expect(converter.braille_dictionary).to eq(converter.dictionary_hash)
-  end
-
-  
   it 'can pull english characters into array' do
     allow(FileAccessor).to receive(:generate_file).and_return(File.new('braille.txt', "w+"))
     allow(FileAccessor).to receive(:message_receiver).and_return(File.open('dummy_message.txt', "r"))
