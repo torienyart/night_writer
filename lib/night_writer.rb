@@ -1,8 +1,6 @@
 require_relative 'file_accessor'
 require_relative 'english_converter'
 
-
-
 new_conversion = EnglishConverter.new
 
 new_conversion.convert_to_braille

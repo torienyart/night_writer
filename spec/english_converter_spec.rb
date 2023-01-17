@@ -74,7 +74,6 @@ describe EnglishConverter do
     
     braille = File.open('braille.txt', "r")
 
-
     line_1 = braille.readlines[0]
     braille.rewind
     line_2 = braille.readlines[1]
@@ -84,7 +83,5 @@ describe EnglishConverter do
     expect(line_1.size).to eq(81)
     expect(line_2.size).to eq(81)
     expect(line_3.size).to eq(81)
-
   end
-  
 end

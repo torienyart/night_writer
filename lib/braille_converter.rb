@@ -74,5 +74,4 @@ class BrailleConverter
     english.write(format_english)
     english.rewind
   end
-
 end
