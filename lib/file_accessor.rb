@@ -17,6 +17,6 @@ class FileAccessor
   end
 
   def self.output_character_count
-    open_new_file.read.size
+    open_new_file.read.gsub("\n",'').size
   end
 end

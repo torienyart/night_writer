@@ -4,11 +4,11 @@ require './lib//modules/keyable'
 
 class BrailleConverter
   include Keyable
-  attr_reader :english_dictionary
-  def initialize
-    @english_dictionary = dictionary_hash
-    @braille_characters = []
-  end
+  # attr_reader :english_dictionary
+  # def initialize
+  #   @english_dictionary = dictionary_hash
+  #   @braille_characters = []
+  # end
 
   def dictionary_hash
     {
